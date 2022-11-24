@@ -18,7 +18,10 @@ class ControladorMensaje {
 
 
     calcularOperacion = (req,res) => {
-        res.json( this.apiMensaje.calcularOperacion() )
+        let {num1, num2, operacion} = req.query
+        num1 = parseInt(num1)
+        num2 = parseInt(num2)
+        res.json( this.apiMensaje.calcularOperacion(num1, num2, operacion))
     }
 
 }

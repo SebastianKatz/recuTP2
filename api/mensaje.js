@@ -41,34 +41,42 @@ class ApiMensaje {
   };
 
   calcularOperacion = (num1_, num2_, operacion_) => {
-    let resultado
+    let resultado_
+    let result
     try {
       
       if (operacion_.toLowerCase() == "suma") {
-        resultado = num1_ + num2_
+        result = num1_ + num2_
       }
       else if (operacion_.toLowerCase() == "resta") {
-        resultado = num1_ - num2_
+        result = num1_ - num2_
       }
       else if (operacion_.toLowerCase() == "multiplicacion") {
-        resultado = num1_ * num2_
+        result = num1_ * num2_
       }
       else if (operacion_.toLowerCase() == "division") {
-        resultado = num1_ / num2_
+        if(num2_ <= 0) throw new Error()
+        result = num1_ / num2_
       }
       else {
-        resultado = {
+        resultado_ = {
           error: {
             num1: {valor: num1_, tipo: typeof(num1_)},
             num2: {valor: num2_, tipo: typeof(num2_)},
             operacion: {valor: operacion_, tipo: typeof(operacion_)}
           }
         }
+        return resultado_
       }
-
+      resultado_ = {
+        num1: num1_,
+        num2: num2_,
+        operacion: operacion_,
+        resultado: result
+      }
     }
     catch(error) {
-      resultado = {
+      resultado_ = {
         error: {
           num1: {valor: num1_, tipo: typeof(num1_)},
           num2: {valor: num2_, tipo: typeof(num2_)},
@@ -76,7 +84,7 @@ class ApiMensaje {
         }
       }
     }
-    return resultado
+    return resultado_
   };
 }
 export default ApiMensaje
